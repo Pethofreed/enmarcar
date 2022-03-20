@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { Typography } from '@mui/material';
 
 const users = [
   { username: 'admin', pass: 'root' },
@@ -40,7 +41,10 @@ const Login = () => {
               id="standard-basic"
               label="Usuario"
               variant="standard"
-              onChange={(e) => setUser(e.target.value)}
+              onChange={(e) => {
+                setUser(e.target.value)
+                setError(false)
+              }}
               value={user}
             />
 
@@ -49,10 +53,18 @@ const Login = () => {
               label="Contraseña"
               variant="standard"
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setError(false)
+              }}
               value={password}
             />
           </div>
+          {error && (
+            <Typography variant="caption" display="block" gutterBottom sx={{ color: 'red', fontWeight: 'bold'}}>
+              Usuario o contraseña incorrecto.
+            </Typography>
+          )}
         </CardContent>
         <CardActions>
           <Button size="small" onClick={() => handleSession()}>Ingresar</Button>
