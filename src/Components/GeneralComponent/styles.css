@@ -3,9 +3,11 @@
   flex-direction: column;
 }
 
-.enmarcacion-material-select {
-  margin: 15px 0;
+.enmarcacion-type-of-picture {
+  margin-bottom: 10px;
+}
+
+.enmarcacion-ancho-alto-inputs TextField {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
 }

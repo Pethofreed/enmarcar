@@ -1,80 +1,87 @@
 import './styles.css';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
 import Radio from '@mui/material/Radio';
+import Select from '@mui/material/Select';
+import Divider from '@mui/material/Divider';
+import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
+import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
+import GeneralComponent from '../GeneralComponent';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 const Enmarcación = () => {
 
-  const [alto, setAlto] = useState(0);
-  const [ancho, setAncho] = useState(0);
-  const calcCms = () => {
-    const sum = (alto * 2) + (ancho * 2);
-    return sum / 100;
+  const [material, setMaterial] = useState('');
+  const [tipoMaterial, setTipoMaterial] = useState('plastico');
+  const [materialValue, setMaterialValue] = useState('estandar');
+
+  const handleChangeTipoMaterial = (e) => {
+    setTipoMaterial(e.target.value);
+  };
+
+  const handleChangeMaterial = (e) => {
+    setMaterial(e.target.value);
+  };
+
+  const handleMaterialValue = (e) => {
+    setMaterialValue(e.target.value)
   }
 
   return (
     <div className="enmarcacion-container">
-      <div className="enmarcacion-type-of-picture">
+      <GeneralComponent />
+
+      <div className="enmarcacion-material-select">
+        <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Tipo Material</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label='Tipo material'
+              value={tipoMaterial}
+              size="small"
+              onChange={handleChangeTipoMaterial}
+            >
+              <MenuItem value="plastico">Plástico</MenuItem>
+              <MenuItem value="madera">Madera</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Material</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label='Material'
+              value={material}
+              size="small"
+              onChange={handleChangeMaterial}
+            >
+              <MenuItem value="uno">Tipo uno</MenuItem>
+              <MenuItem value="dos">Tipo dos</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
         <FormControl>
           <RadioGroup
-          row
+            row
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="type-of-picture"
+            defaultValue="personalizado"
             name="radio-buttons-group"
+            value={materialValue}
+            onChange={handleMaterialValue}
           >
-            <FormControlLabel value="foto" control={<Radio  />} label="Foto" />
-            <FormControlLabel value="pintura" control={<Radio  />} label="Pintura" />
-            <FormControlLabel value="imagen" control={<Radio  />} label="Imagen" />
-            <FormControlLabel value="otro" control={<Radio  />} label="Otro" />
+            <FormControlLabel value="estandar" control={<Radio />} label="Estandar" />
+            <FormControlLabel value="personalizado" control={<Radio  />} label="Personalizado" />
           </RadioGroup>
         </FormControl>
-      </div>
-
-      <div className="enmarcacion-ancho-alto-inputs">
-      <TextField
-        id="outlined-number"
-        label="Medida ancho"
-        type="number"
-        size="small"
-        className='ancho'
-        rows={1}
-        value={ancho}
-        onChange={(e) => setAncho(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{
-          marginRight: '10px',
-          marginBottom: '15px',
-          width: 150
-        }}
-      />
-      <TextField
-        id="outlined-number"
-        label="Medida alto"
-        type="number"
-        size="small"
-        maxRows='3'
-        value={alto}
-        onChange={(e) => setAlto(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{
-          marginRight: '10px',
-          marginBottom: '15px',
-          width: 150
-        }}
-      />
-      {(!!ancho && !!alto) && (
-        <Typography>
-          Total: {calcCms()} Centímetros
-        </Typography>
-      )}
       </div>
     </div>
   )

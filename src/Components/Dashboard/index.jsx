@@ -45,7 +45,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant="scrollable" scrollButtons allowScrollButtonsMobile>
             <Tab label="Enmarcación" {...a11yProps(0)} />
             <Tab label="Retablo" {...a11yProps(1)} />
             <Tab label="Bastidor" {...a11yProps(2)} />
