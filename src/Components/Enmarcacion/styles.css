@@ -1,0 +1,13 @@
+.enmarcacion-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.enmarcacion-type-of-picture {
+  margin-bottom: 10px;
+}
+
+.enmarcacion-ancho-alto-inputs TextField {
+  display: flex;
+  flex-wrap: wrap;
+}
