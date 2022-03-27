@@ -67,7 +67,7 @@ const Enmarcación = () => {
 
   const [marco, setMarco] = useState('true');
   const [material, setMaterial] = useState('');
-  const [color, setColor] = useState('color_1');
+  const [color, setColor] = useState('');
   const [type, setType] = useState('tradicional');
   const [paspartout, setPaspartout] = useState(false);
   const [altoPaspartout, setAltoPaspartout] = useState(0);
@@ -192,24 +192,20 @@ const Enmarcación = () => {
 
             <div className="paspartout-personalizado">
               <div className="paspartout-row mt-10">
-                <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Color</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label='Color'
-                      value={color}
-                      size="small"
-                      onChange={handleChangeColor}
-                    >
-                      <MenuItem value="color_1">Color 1</MenuItem>
-                      <MenuItem value="color_2">Color 2</MenuItem>
-                      <MenuItem value="color_3">Color 3</MenuItem>
-                      <MenuItem value="color_4">Color 4</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
+                <TextField
+                  id="outlined-number"
+                  label="Color"
+                  type="text"
+                  size="small"
+                  maxRows='3'
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  sx={{
+                    marginRight: '10px',
+                    marginBottom: '15px',
+                    width: 150
+                  }}
+                />
 
                 <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
                   <FormControl fullWidth>
