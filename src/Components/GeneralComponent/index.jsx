@@ -43,46 +43,46 @@ const GeneralComponent = () => {
       </div>
 
       <div className="enmarcacion-ancho-alto-inputs">
-      <TextField
-        id="outlined-number"
-        label="Medida ancho"
-        type="number"
-        size="small"
-        className='ancho'
-        rows={1}
-        value={ancho}
-        onChange={(e) => setAncho(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{
-          marginRight: '10px',
-          marginBottom: '15px',
-          width: 150
-        }}
-      />
-      <TextField
-        id="outlined-number"
-        label="Medida alto"
-        type="number"
-        size="small"
-        maxRows='3'
-        value={alto}
-        onChange={(e) => setAlto(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        sx={{
-          marginRight: '10px',
-          marginBottom: '15px',
-          width: 150
-        }}
-      />
-      {(!!ancho && !!alto) && (
-        <Typography>
-          Total: {calcCms()} Centímetros
-        </Typography>
-      )}
+        <TextField
+          id="outlined-number"
+          label="Medida ancho"
+          type="number"
+          size="small"
+          className='ancho'
+          rows={1}
+          value={ancho}
+          onChange={(e) => setAncho(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          sx={{
+            marginRight: '10px',
+            marginBottom: '15px',
+            width: 150
+          }}
+        />
+        <TextField
+          id="outlined-number"
+          label="Medida alto"
+          type="number"
+          size="small"
+          maxRows='3'
+          value={alto}
+          onChange={(e) => setAlto(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          sx={{
+            marginRight: '10px',
+            marginBottom: '15px',
+            width: 150
+          }}
+        />
+        {(!!ancho && !!alto) && (
+          <Typography>
+            Total: {calcCms()}
+          </Typography>
+        )}
       </div>
       <Divider />
     </div>

@@ -5,6 +5,7 @@ import Radio from '@mui/material/Radio';
 import Select from '@mui/material/Select';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,11 +14,71 @@ import GeneralComponent from '../GeneralComponent';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+
 const Enmarcación = () => {
 
+  const Madera = () => {
+    return(
+      <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Material</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label='Material'
+            value={material}
+            size="small"
+            onChange={handleChangeMaterial}
+          >
+            <MenuItem value="m-uno">Madera uno</MenuItem>
+            <MenuItem value="m-dos">Madera Dos</MenuItem>
+            <MenuItem value="m-tres">Madera Tres</MenuItem>
+            <MenuItem value="m-cuatro">Madera Cuatro</MenuItem>
+            <MenuItem value="m-cinco">Madera Cinco</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+    )
+  }
+
+  const Plastico = () => {
+    return(
+      <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Material</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label='Material'
+            value={material}
+            size="small"
+            onChange={handleChangeMaterial}
+          >
+            <MenuItem value="p-uno">Plastico uno</MenuItem>
+            <MenuItem value="p-dos">Plastico Dos</MenuItem>
+            <MenuItem value="p-tres">Plastico Tres</MenuItem>
+            <MenuItem value="p-cuatro">Plastico Cuatro</MenuItem>
+            <MenuItem value="p-cinco">Plastico Cinco</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+    )
+  };
+
+  const [marco, setMarco] = useState('true');
   const [material, setMaterial] = useState('');
+  const [color, setColor] = useState('color_1');
+  const [type, setType] = useState('tradicional');
+  const [paspartout, setPaspartout] = useState(false);
+  const [altoPaspartout, setAltoPaspartout] = useState(0);
+  const [anchoPaspartout, setAnchoPaspartout] = useState(0);
   const [tipoMaterial, setTipoMaterial] = useState('plastico');
   const [materialValue, setMaterialValue] = useState('estandar');
+
+  const calcularPaspartout = () => {
+    const sum = (altoPaspartout * 2) + (anchoPaspartout * 2);
+    return sum / 100;
+  }
 
   const handleChangeTipoMaterial = (e) => {
     setTipoMaterial(e.target.value);
@@ -29,6 +90,10 @@ const Enmarcación = () => {
 
   const handleMaterialValue = (e) => {
     setMaterialValue(e.target.value)
+  }
+
+  const handleChangeColor = (e) => {
+    setColor(e.target.value);
   }
 
   return (
@@ -53,22 +118,8 @@ const Enmarcación = () => {
           </FormControl>
         </Box>
 
-        <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Material</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label='Material'
-              value={material}
-              size="small"
-              onChange={handleChangeMaterial}
-            >
-              <MenuItem value="uno">Tipo uno</MenuItem>
-              <MenuItem value="dos">Tipo dos</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        {tipoMaterial === 'plastico' ? <Plastico /> : <Madera />}
+
         <FormControl>
           <RadioGroup
             row
@@ -83,6 +134,123 @@ const Enmarcación = () => {
           </RadioGroup>
         </FormControl>
       </div>
+      <Divider />
+      <div className="enmarcacion-paspartout">
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={paspartout}
+              onChange={() => setPaspartout(!paspartout)}
+            />
+          }
+          label="Paspartout"
+        />
+        {paspartout && (
+          <>
+            <div className="enmarcacion-ancho-alto-inputs mt-10">
+              <TextField
+                id="outlined-number"
+                label="Ancho"
+                type="number"
+                size="small"
+                className='ancho'
+                rows={1}
+                value={anchoPaspartout}
+                onChange={(e) => setAnchoPaspartout(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{
+                  marginRight: '10px',
+                  marginBottom: '15px',
+                  width: 150
+                }}
+              />
+              <TextField
+                id="outlined-number"
+                label="Alto"
+                type="number"
+                size="small"
+                maxRows='3'
+                value={altoPaspartout}
+                onChange={(e) => setAltoPaspartout(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{
+                  marginRight: '10px',
+                  marginBottom: '15px',
+                  width: 150
+                }}
+              />
+              {(!!anchoPaspartout && !!altoPaspartout) && (
+                <Typography>
+                  Total: {calcularPaspartout()}
+                </Typography>
+              )}
+            </div>
+
+            <div className="paspartout-personalizado">
+              <div className="paspartout-row mt-10">
+                <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Color</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label='Color'
+                      value={color}
+                      size="small"
+                      onChange={handleChangeColor}
+                    >
+                      <MenuItem value="color_1">Color 1</MenuItem>
+                      <MenuItem value="color_2">Color 2</MenuItem>
+                      <MenuItem value="color_3">Color 3</MenuItem>
+                      <MenuItem value="color_4">Color 4</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+
+                <Box sx={{ width: 150, marginRight: '10px', marginBottom: '15px' }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label='Type'
+                      value={type}
+                      size="small"
+                      onChange={(e) => setType(e.target.value)}
+                    >
+                      <MenuItem value="tradicional">Tradicional</MenuItem>
+                      <MenuItem value="externo">Externo</MenuItem>
+                      <MenuItem value="flotante">Flotante</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
+              {type === 'flotante' && (
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="personalizado"
+                    name="radio-buttons-group"
+                    value={marco}
+                    onChange={(e) => setMarco(e.target.value)}
+                  >
+                    <FormControlLabel value="true" control={<Radio />} label="Con marco" />
+                    <FormControlLabel value="false" control={<Radio  />} label="Sin marco" />
+                  </RadioGroup>
+                </FormControl>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+
+
+
     </div>
   )
 }
