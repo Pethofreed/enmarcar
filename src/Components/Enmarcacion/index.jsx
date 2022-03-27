@@ -9,6 +9,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const Enmarcación = () => {
 
+  const [notas, setNotas] = useState('');
   const [material, setMaterial] = useState('');
   const [vidrio, setVidrio] = useState('anti_reflejo');
   const [altoPaspartout, setAltoPaspartout] = useState(0);
@@ -65,6 +66,8 @@ const Enmarcación = () => {
         label="Notas"
         placeholder="Notas, anotaciones..."
         multiline
+        value={notas}
+        onChange={(e) => setNotas(e.target.value)}
       />
 
       <div className="mt-20">

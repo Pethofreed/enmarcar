@@ -1,3 +1,8 @@
+.material-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .enmarcacion-material-select {
   margin: 10px 0;
   display: flex;
