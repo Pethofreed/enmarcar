@@ -1,17 +1,6 @@
-.enmarcacion-container, .enmarcacion-paspartout {
+.enmarcacion-container {
   display: flex;
   flex-direction: column;
-}
-
-.enmarcacion-material-select {
-  margin: 15px 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.paspartout-row {
-  display: flex;
 }
 
 .mt-10 {

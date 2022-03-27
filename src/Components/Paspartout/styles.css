@@ -1,0 +1,8 @@
+.paspartout-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.paspartout-row {
+  display: flex;
+}
