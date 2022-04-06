@@ -10,6 +10,56 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+
+
+
+
+
+
+
+
+const materialPlastico = [
+  { nombre: '1001 05', precio: 140.360 },
+  { nombre: '10028 05', precio: 162.140 },
+  { nombre: '1015 02', precio: 171.600 },
+  { nombre: '10425', precio: 123.860 },
+  { nombre: '1100', precio: 230.340 },
+  { nombre: '12646', precio: 327.360 },
+  { nombre: '172', precio: 39.600 },
+  { nombre: '173', precio: 59.400 },
+  { nombre: '214', precio: 21.120 },
+  { nombre: '2514', precio: 21.120 },
+  { nombre: '293', precio: 28.820 },
+  { nombre: '3005', precio: 31.900 },
+  { nombre: '3120', precio: 37.620 },
+  { nombre: '314', precio: 27.500 },
+  { nombre: '317', precio: 23.540 },
+  { nombre: '3419', precio: 37.620 },
+  { nombre: '3510', precio: 84.700 },
+  { nombre: '402', precio: 51.040 },
+  { nombre: '414', precio: 44.220 },
+  { nombre: '415', precio: 65.340 },
+  { nombre: '4218', precio: 42.680 },
+  { nombre: '4520', precio: 51.040 },
+  { nombre: '461', precio: 51.700 },
+  { nombre: '4914', precio: 44.660 },
+  { nombre: '4929', precio: 65.780 },
+  { nombre: '494', precio: 64.460 },
+  { nombre: '555', precio: 59.180 },
+  { nombre: '616', precio: 73.480 },
+  { nombre: '670', precio: 84.260 },
+  { nombre: '7502', precio: 0 },
+  { nombre: '7513', precio: 88.660 },
+  { nombre: '7534', precio: 146.960 },
+  { nombre: '7919', precio: 90.640 },
+  { nombre: '821', precio: 94.820 },
+  { nombre: '8529', precio: 167.200 },
+  { nombre: '9531', precio: 154.440 },
+  { nombre: '982', precio: 139.040 },
+  { nombre: '9929', precio: 186.340 },
+  { nombre: '999', precio: 170.280 },
+]
+
 const Material = ({
   material, setMaterial,
   tipoMaterial, setTipoMaterial,
@@ -58,11 +108,11 @@ const Material = ({
             size="small"
             onChange={(e) => setMaterial(e.target.value)}
           >
-            <MenuItem value="p-uno">Plastico uno</MenuItem>
-            <MenuItem value="p-dos">Plastico Dos</MenuItem>
-            <MenuItem value="p-tres">Plastico Tres</MenuItem>
-            <MenuItem value="p-cuatro">Plastico Cuatro</MenuItem>
-            <MenuItem value="p-cinco">Plastico Cinco</MenuItem>
+            {materialPlastico.map(({nombre}) => {
+              return (
+                <MenuItem value={nombre}>{nombre}</MenuItem>
+              )
+            })}
           </Select>
         </FormControl>
       </Box>
