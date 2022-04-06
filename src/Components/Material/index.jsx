@@ -1,5 +1,5 @@
 import './styles.css';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Radio from '@mui/material/Radio';
 import Select from '@mui/material/Select';
@@ -14,9 +14,12 @@ const Material = ({
   material, setMaterial,
   tipoMaterial, setTipoMaterial,
   materialValue, setMaterialValue,
+  caracteristicas, setCaracteristicas
 }) => {
 
-  const [caracteristicas, setCaracteristicas] = useState('');
+  useEffect(() => {
+    setMaterial('')
+  }, [tipoMaterial])
 
   const Madera = () => {
     return(
@@ -88,19 +91,21 @@ const Material = ({
 
         {tipoMaterial === 'plastico' ? <Plastico /> : <Madera />}
 
-        <FormControl>
-          <RadioGroup
-            row
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="personalizado"
-            name="radio-buttons-group"
-            value={materialValue}
-            onChange={(e) => setMaterialValue(e.target.value)}
-          >
-            <FormControlLabel value="estandar" control={<Radio />} label="Estandar" />
-            <FormControlLabel value="personalizado" control={<Radio  />} label="Personalizado" />
-          </RadioGroup>
-        </FormControl>
+        {material && (
+          <FormControl>
+            <RadioGroup
+              row
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="personalizado"
+              name="radio-buttons-group"
+              value={materialValue}
+              onChange={(e) => setMaterialValue(e.target.value)}
+            >
+              <FormControlLabel value="estandar" control={<Radio />} label="Estandar" />
+              <FormControlLabel value="personalizado" control={<Radio  />} label="Personalizado" />
+            </RadioGroup>
+          </FormControl>
+        )}
       </div>
       <div className="caracteristicas">
         {materialValue === 'personalizado' && (
@@ -110,6 +115,7 @@ const Material = ({
               label="Personalizado"
               placeholder="Características..."
               multiline
+              fullWidth
               value={caracteristicas}
               onChange={(e) => setCaracteristicas(e.target.value)}
             />

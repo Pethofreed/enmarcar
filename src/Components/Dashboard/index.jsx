@@ -1,10 +1,11 @@
 import './styles.css';
+import { useState } from 'react';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import Enmarcación from '../Enmarcacion';
+import EnmarcacionFinal from '../EnmarcacionFinal';
+import Retablo from '../Retablo';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,10 +54,10 @@ const Dashboard = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Enmarcación />
+          <EnmarcacionFinal />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Retablo
+          <Retablo />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Bastidor

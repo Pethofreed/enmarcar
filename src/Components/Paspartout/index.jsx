@@ -24,6 +24,7 @@ const Paspartout = ({
   const [paspartout, setPaspartout] = useState(false);
 
   const [material, setMaterial] = useState('');
+  const [caracteristicas, setCaracteristicas] = useState('');
   const [tipoMaterial, setTipoMaterial] = useState('plastico');
   const [materialValue, setMaterialValue] = useState('estandar');
 
@@ -146,6 +147,8 @@ const Paspartout = ({
                   setTipoMaterial={setTipoMaterial}
                   materialValue={materialValue}
                   setMaterialValue={setMaterialValue}
+                  caracteristicas={caracteristicas}
+                  setCaracteristicas={setCaracteristicas}
                 />
               )}
             </div>
