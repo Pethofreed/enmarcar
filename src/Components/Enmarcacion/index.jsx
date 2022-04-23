@@ -1,16 +1,22 @@
 import './styles.css';
-import { useEffect, useState } from 'react';
 import Material from '../Material';
 import Paspartout from '../Paspartout';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import GeneralComponent from '../GeneralComponent';
+import { GUARDAR_PRECIO, CALCULAR_TOTAL } from '../../Store/PreciosReducer';
+import { calcularLongitud, materialMadera, materialPlastico } from '../Helpers';
 import { Box, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 
 const Enmarcación = ({
-  otroMarco, setOtroMarco, ultimo
+  otroMarco, setOtroMarco, ultimo, precio, allPrecios, setAllPrecios
 }) => {
 
+  const dispatch = useDispatch();
+  const [alto, setAlto] = useState(0);
+  const [ancho, setAncho] = useState(0);
   const [notas, setNotas] = useState('');
   const [material, setMaterial] = useState('');
   const [vidrio, setVidrio] = useState('anti_reflejo');
@@ -20,13 +26,45 @@ const Enmarcación = ({
   const [tipoMaterial, setTipoMaterial] = useState('plastico');
   const [materialValue, setMaterialValue] = useState('estandar');
 
+  const longitud = (alto && ancho) && calcularLongitud(alto, ancho);
+
+  let precioTotalPorLongitud;
+  let dataMaterial;
+  if (longitud) {
+    if (tipoMaterial === 'plastico' && material)
+    dataMaterial = materialPlastico.find(({ nombre }) => nombre === material)
+    else if (tipoMaterial === 'madera')
+    dataMaterial = materialMadera.find(({ nombre }) => nombre === material)
+
+    precioTotalPorLongitud = longitud * dataMaterial?.precio;
+  }
+
   useEffect(() => {
-    materialValue === 'estandar' && setCaracteristicas('')
+    setMaterial('Elegir...')
+    setAllPrecios(allPrecios, allPrecios[precio] = 0)
+    dispatch({ type: GUARDAR_PRECIO, payload: allPrecios })
+    dispatch({ type: CALCULAR_TOTAL, payload: '' })
+  }, [tipoMaterial])
+
+  useEffect(() => {
+    if (precioTotalPorLongitud)
+    setAllPrecios(allPrecios, allPrecios[precio] = precioTotalPorLongitud)
+    dispatch({ type: GUARDAR_PRECIO, payload: allPrecios })
+    dispatch({ type: CALCULAR_TOTAL, payload: '' })
+  }, [precioTotalPorLongitud, allPrecios, precio, setAllPrecios])
+
+  useEffect(() => {
+    if (materialValue === 'estandar') setCaracteristicas('')
   }, [materialValue])
 
   return (
     <div className="enmarcacion-container">
-      <GeneralComponent />
+      <GeneralComponent
+        alto={alto}
+        setAlto={setAlto}
+        ancho={ancho}
+        setAncho={setAncho}
+      />
 
       <Material
         material={material}

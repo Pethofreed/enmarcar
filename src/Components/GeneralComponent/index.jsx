@@ -2,21 +2,21 @@ import './styles.css';
 import { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import Divider from '@mui/material/Divider';
+import { calcularLongitud } from '../Helpers';
 import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const GeneralComponent = () => {
+const GeneralComponent = ({
+  alto, setAlto,
+  ancho, setAncho
+}) => {
 
-  const [alto, setAlto] = useState(0);
-  const [ancho, setAncho] = useState(0);
+  const longitud = (alto && ancho) && calcularLongitud(alto, ancho);
+
   const [tipoCuadro, setTipoCuadro] = useState('foto');
-  const calcCms = () => {
-    const sum = (alto * 2) + (ancho * 2);
-    return sum / 100;
-  }
 
   const cambioTipoCuadro = (e) => {
     setTipoCuadro(e.target.value);
@@ -80,7 +80,7 @@ const GeneralComponent = () => {
         />
         {(!!ancho && !!alto) && (
           <Typography>
-            Total: {calcCms()}
+            Total: {longitud}
           </Typography>
         )}
       </div>

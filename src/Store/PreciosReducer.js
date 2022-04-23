@@ -1,43 +1,39 @@
-const SAVE_USER = 'SAVE_USER'
-const USER_ERROR = 'USER_ERROR'
-const USER_SUCCESS = 'USER_SUCCESS'
-const USER_LOADING = 'USER_LOADING'
-const USER_FINISHED = 'USER_FINISHED'
+export const CALCULAR_TOTAL = 'CALCULAR_TOTAL';
+export const GUARDAR_PRECIO = 'GUARDAR_PRECIO';
+const USER_SUCCESS = 'USER_SUCCESS';
+const USER_LOADING = 'USER_LOADING';
+const USER_FINISHED = 'USER_FINISHED';
 
 
 const initialState = {
-  user: {},
-  loading: false,
+  precios : {},
+  total: 0,
   error: null,
+  precioFinal: 0,
 }
 
 export function PreciosReducer(state = initialState, action){
   switch(action.type) {
-    case USER_LOADING:
+    case GUARDAR_PRECIO:
       return {
         ...state,
-        loading: true,
+        precios: action.payload
       }
-    case USER_SUCCESS:
+    case CALCULAR_TOTAL:
       return {
         ...state,
-        user: action.payload,
+        total: Object.values(state.precios).map(num => num).reduce((a,b) => a +b, 0),
       }
-    case USER_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
-    case USER_FINISHED:
-      return {
-        ...state,
-        loading: false,
-      }
-    case SAVE_USER:
-      return {
-        ...state,
-        user: action.payload,
-      }
+    // case USER_ERROR:
+    //   return {
+    //     ...state,
+    //     error: action.payload,
+    //   }
+    // case USER_FINISHED:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //   }
     default:
       return state
   }
