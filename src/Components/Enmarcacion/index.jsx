@@ -11,7 +11,7 @@ import { calcularLongitud, materialMadera, materialPlastico } from '../Helpers';
 import { Box, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 
 const Enmarcación = ({
-  otroMarco, setOtroMarco, ultimo, precio, allPrecios, setAllPrecios
+  otroMarco, setOtroMarco, ultimo, precio, allPrecios, setAllPrecios, marco, ComponenteMedidas
 }) => {
 
   const dispatch = useDispatch();
@@ -59,12 +59,18 @@ const Enmarcación = ({
 
   return (
     <div className="enmarcacion-container">
-      <GeneralComponent
-        alto={alto}
-        setAlto={setAlto}
-        ancho={ancho}
-        setAncho={setAncho}
-      />
+      {marco && (
+        <h2>Marco N° {marco}</h2>
+      )}
+
+      {ComponenteMedidas && (
+          <GeneralComponent
+          alto={alto}
+          setAlto={setAlto}
+          ancho={ancho}
+          setAncho={setAncho}
+        />
+      )}
 
       <Material
         material={material}

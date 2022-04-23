@@ -1,5 +1,5 @@
 import './styles.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Radio from '@mui/material/Radio';
 import Select from '@mui/material/Select';
@@ -32,6 +32,23 @@ const Paspartout = ({
     const sum = (altoPaspartout * 2) + (anchoPaspartout * 2);
     return sum / 100;
   }
+
+  useEffect(() => {
+    if (!paspartout) {
+      setAltoPaspartout(0)
+      setAnchoPaspartout(0)
+      setColor('')
+      setType('tradicional')
+      setMarco(false)
+      setTipoMaterial('plastico')
+      setMaterial('Elegir...')
+      setCaracteristicas('')
+      setMaterialValue('estandar')
+    }
+
+    if (materialValue === 'estandar')
+      setCaracteristicas('')
+  }, [paspartout, materialValue])
 
   return(
     <>

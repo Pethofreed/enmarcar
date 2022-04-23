@@ -31,6 +31,7 @@ const EnmarcacionFinal = () => {
         precio="precio_uno"
         allPrecios={allPrecios}
         setAllPrecios={setAllPrecios}
+        ComponenteMedidas
       />
       {nuevoMarco1 && (
         <Enmarcación
@@ -39,6 +40,7 @@ const EnmarcacionFinal = () => {
           precio="precio_dos"
           allPrecios={allPrecios}
           setAllPrecios={setAllPrecios}
+          marco='Dos'
         />
       )}
       {nuevoMarco2 && (
@@ -48,6 +50,7 @@ const EnmarcacionFinal = () => {
           precio="precio_tres"
           allPrecios={allPrecios}
           setAllPrecios={setAllPrecios}
+          marco='Tres'
         />
       )}
       {nuevoMarco3 && (
@@ -57,6 +60,7 @@ const EnmarcacionFinal = () => {
           precio="precio_cuatro"
           allPrecios={allPrecios}
           setAllPrecios={setAllPrecios}
+          marco='Cuatro'
         />
       )}
       {nuevoMarco4 && (
@@ -66,6 +70,7 @@ const EnmarcacionFinal = () => {
           precio="precio_cinco"
           allPrecios={allPrecios}
           setAllPrecios={setAllPrecios}
+          marco='Cinco'
         />
       )}
       {nuevoMarco5 && (
@@ -73,11 +78,13 @@ const EnmarcacionFinal = () => {
           ultimo precio="precio-seis"
           allPrecios={allPrecios}
           setAllPrecios={setAllPrecios}
+          marco='Seis'
         />
       )}
       <div>
         <h1>Total: $ {total} Pesos</h1>
       </div>
+
     </>
   )
 }
