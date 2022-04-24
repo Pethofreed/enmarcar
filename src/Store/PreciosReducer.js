@@ -1,6 +1,5 @@
 export const CHANGE_DATA = 'CHANGE_DATA';
 export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
-// export const GUARDAR_PRECIO = 'GUARDAR_PRECIO';
 
 
 const initialState = {
@@ -33,6 +32,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
     segundo: {
       nombre: 'Segundo marco',
@@ -62,6 +63,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
     tercero: {
       nombre: 'Tercer marco',
@@ -90,6 +93,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
     cuarto: {
       nombre: 'Cuarto marco',
@@ -118,6 +123,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
     quinto: {
       nombre: 'Quinto marco',
@@ -146,6 +153,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
     sexto: {
       nombre: 'Sexto marco',
@@ -174,6 +183,8 @@ const initialState = {
       },
       vidrio: 'anti_reflejo',
       anotaciones: '',
+      precioMaterial: 0,
+      precioPaspartout: 0,
     },
   }
 }
@@ -193,16 +204,6 @@ export function PreciosReducer(state = initialState, action){
         ...state,
         precios: action.payload
       }
-    // case CALCULAR_TOTAL:
-    //   return {
-    //     ...state,
-    //     total: Object.values(state.precios).map(num => num).reduce((a,b) => a +b, 0),
-    //   }
-    // case USER_FINISHED:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //   }
     default:
       return state
   }

@@ -9,9 +9,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
+import { CHANGE_DATA } from '../../Store/PreciosReducer';
 import { materialMadera, materialPlastico } from '../Helpers';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { CHANGE_DATA } from '../../Store/PreciosReducer';
 
 const Material = ({
   nombreMarco,
@@ -37,8 +37,13 @@ const Material = ({
 
   useEffect(() => {
     if (materialValue === 'estandar') setCaracteristicas('');
+    const materialActual = tipoMaterial === 'plastico'
+      ? materialPlastico?.find(({ nombre }) => nombre === material)
+      : materialMadera?.find(({ nombre }) => nombre === material);
+    const precioMaterial = data?.medidas?.longitud * materialActual?.precio;
     const newData = {
       ...data,
+      precioMaterial,
       materiales: {
         tipo: tipoMaterial,
         material,
