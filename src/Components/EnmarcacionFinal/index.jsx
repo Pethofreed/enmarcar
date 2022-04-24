@@ -4,17 +4,18 @@ import { useSelector } from "react-redux";
 
 const EnmarcacionFinal = () => {
 
+  const formatter = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+  })
+
   const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
     ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
   }))
 
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-
-  }, [ordenDeTrabajo])
-
-  // const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
+  const total = Object.values(ordenDeTrabajo)?.map(( { precioMaterial }) => precioMaterial)
+  .reduce((a,b) => a + b, 0);
 
   const [nuevoMarco1, setNuevoMarco1] = useState(false);
   const [nuevoMarco2, setNuevoMarco2] = useState(false);
@@ -70,7 +71,7 @@ const EnmarcacionFinal = () => {
         />
       )}
       <div>
-        <h1>Total: $ {total ? total : 0} Pesos</h1>
+        <h1>Total: {total ? formatter.format(total) : 0} Pesos</h1>
       </div>
 
     </>
