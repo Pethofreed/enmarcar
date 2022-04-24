@@ -30,6 +30,8 @@ const Material = ({
 
 
   const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
+  const { alto, ancho } = data?.medidas || {};
+  const noValido = !(alto > 0 && ancho > 0 );
 
   useEffect(() => {
     setMaterial('Elegir...')
@@ -40,7 +42,7 @@ const Material = ({
     const materialActual = tipoMaterial === 'plastico'
       ? materialPlastico?.find(({ nombre }) => nombre === material)
       : materialMadera?.find(({ nombre }) => nombre === material);
-    const precioMaterial = data?.medidas?.longitud * materialActual?.precio;
+    const precioMaterial =  data?.medidas?.longitud * materialActual?.precio;
     const newData = {
       ...data,
       precioMaterial,
@@ -69,7 +71,7 @@ const Material = ({
           >
             {materialMadera.map(({nombre}) => {
               return (
-                <MenuItem value={nombre}>{nombre}</MenuItem>
+                <MenuItem key={nombre} value={nombre}>{nombre}</MenuItem>
               )
             })}
           </Select>
@@ -90,10 +92,11 @@ const Material = ({
             value={material}
             size="small"
             onChange={(e) => setMaterial(e.target.value)}
+            disabled={noValido}
           >
             {materialPlastico.map(({nombre}) => {
               return (
-                <MenuItem value={nombre}>{nombre}</MenuItem>
+                <MenuItem key={nombre} value={nombre}>{nombre}</MenuItem>
               )
             })}
           </Select>
@@ -115,6 +118,7 @@ const Material = ({
               value={tipoMaterial}
               size="small"
               onChange={(e) => setTipoMaterial(e.target.value)}
+              disabled={noValido}
             >
               <MenuItem value="plastico">Plástico</MenuItem>
               <MenuItem value="madera">Madera</MenuItem>
