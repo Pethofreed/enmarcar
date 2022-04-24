@@ -1,21 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Enmarcación from "../Enmarcacion";
 import { useSelector } from "react-redux";
 
 const EnmarcacionFinal = () => {
 
-  const { precios, total } = useSelector(({PreciosReducer}) => ({
-    precios: PreciosReducer.precios,
-    total: PreciosReducer.total,
+  const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
+    ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
   }))
 
-  const [allPrecios, setAllPrecios] = useState({
-    precio_uno: 0,
-    precio_dos: 0,
-    precio_tres: 0,
-    precio_cuatro: 0,
-    precio_cinco: 0,
-  });
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+
+  }, [ordenDeTrabajo])
+
+  // const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
 
   const [nuevoMarco1, setNuevoMarco1] = useState(false);
   const [nuevoMarco2, setNuevoMarco2] = useState(false);
@@ -28,61 +27,50 @@ const EnmarcacionFinal = () => {
       <Enmarcación
         otroMarco={nuevoMarco1}
         setOtroMarco={setNuevoMarco1}
-        precio="precio_uno"
-        allPrecios={allPrecios}
-        setAllPrecios={setAllPrecios}
-        ComponenteMedidas
+        nombreMarco='Primer marco'
+        numeroMarco='primero'
       />
       {nuevoMarco1 && (
         <Enmarcación
           otroMarco={nuevoMarco2}
           setOtroMarco={setNuevoMarco2}
-          precio="precio_dos"
-          allPrecios={allPrecios}
-          setAllPrecios={setAllPrecios}
-          marco='Dos'
+          nombreMarco='Segundo marco'
+          numeroMarco='segundo'
         />
       )}
       {nuevoMarco2 && (
         <Enmarcación
           otroMarco={nuevoMarco3}
           setOtroMarco={setNuevoMarco3}
-          precio="precio_tres"
-          allPrecios={allPrecios}
-          setAllPrecios={setAllPrecios}
-          marco='Tres'
+          nombreMarco='Tercer marco'
+          numeroMarco='tercero'
         />
       )}
       {nuevoMarco3 && (
         <Enmarcación
           otroMarco={nuevoMarco4}
           setOtroMarco={setNuevoMarco4}
-          precio="precio_cuatro"
-          allPrecios={allPrecios}
-          setAllPrecios={setAllPrecios}
-          marco='Cuatro'
+          nombreMarco='Cuarto marco'
+          numeroMarco='cuarto'
         />
       )}
       {nuevoMarco4 && (
         <Enmarcación
           otroMarco={nuevoMarco5}
           setOtroMarco={setNuevoMarco5}
-          precio="precio_cinco"
-          allPrecios={allPrecios}
-          setAllPrecios={setAllPrecios}
-          marco='Cinco'
+          nombreMarco='Quinto marco'
+          numeroMarco='quinto'
         />
       )}
       {nuevoMarco5 && (
         <Enmarcación
           ultimo precio="precio-seis"
-          allPrecios={allPrecios}
-          setAllPrecios={setAllPrecios}
-          marco='Seis'
+          nombreMarco='Sexto marco'
+          numeroMarco='sexto'
         />
       )}
       <div>
-        <h1>Total: $ {total} Pesos</h1>
+        <h1>Total: $ {total ? total : 0} Pesos</h1>
       </div>
 
     </>

@@ -1,8 +1,8 @@
 import './styles.css';
-import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Radio from '@mui/material/Radio';
 import Select from '@mui/material/Select';
+import { useEffect, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
@@ -10,13 +10,24 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { useDispatch, useSelector } from 'react-redux';
+import MaterialPaspartout from '../MaterialPaspartout';
+import { CHANGE_DATA } from '../../Store/PreciosReducer';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Material from '../Material';
 
 const Paspartout = ({
-  altoPaspartout, setAltoPaspartout,
-  anchoPaspartout, setAnchoPaspartout,
+  nombreMarco, numeroMarco
 }) => {
+
+  const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
+    ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
+  }))
+
+  const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
+
+  const dispath = useDispatch();
+  const [altoPaspartout, setAltoPaspartout] = useState(0);
+  const [anchoPaspartout, setAnchoPaspartout] = useState(0);
 
   const [color, setColor] = useState('');
   const [marco, setMarco] = useState('false');
@@ -44,11 +55,48 @@ const Paspartout = ({
       setMaterial('Elegir...')
       setCaracteristicas('')
       setMaterialValue('estandar')
+      const newData = {
+        ...data,
+        paspartout: false,
+        paspartoutDetails: {
+          paspartoutAncho: 0,
+          paspartoutAlto: 0,
+          paspartoutColor: '',
+          tipoPaspartout: 'tradicional',
+          marco: 'sin_marco',
+          marcoDetails: {
+            tipo: 'plastico',
+            material: 'Elegir...',
+            modificado: 'estandar',
+            caracteristicas: '',
+          },
+        },
+      };
+      dispath({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
+    } else {
+      const newData = {
+        ...data,
+        paspartout: true,
+        paspartoutDetails: {
+          paspartoutAncho: anchoPaspartout,
+          paspartoutAlto: altoPaspartout,
+          paspartoutColor: color,
+          tipoPaspartout: type,
+          marco: marco,
+          marcoDetails: {
+            tipo: tipoMaterial,
+            material: material,
+            modificado: materialValue,
+            caracteristicas,
+          },
+        },
+      };
+      dispath({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
     }
 
     if (materialValue === 'estandar')
       setCaracteristicas('')
-  }, [paspartout, materialValue])
+  }, [paspartout, anchoPaspartout, altoPaspartout, color, marco, type, material, caracteristicas, tipoMaterial ,materialValue])
 
   return(
     <>
@@ -151,13 +199,13 @@ const Paspartout = ({
                     value={marco}
                     onChange={(e) => setMarco(e.target.value)}
                   >
-                    <FormControlLabel value="true" control={<Radio />} label="Con marco" />
-                    <FormControlLabel value="false" control={<Radio  />} label="Sin marco" />
+                    <FormControlLabel value="con_marco" control={<Radio />} label="Con marco" />
+                    <FormControlLabel value="sin_marco" control={<Radio  />} label="Sin marco" />
                   </RadioGroup>
                 </FormControl>
               )}
-              {marco === 'true' && (
-                <Material
+              {marco === 'con_marco' && (
+                <MaterialPaspartout
                   material={material}
                   setMaterial={setMaterial}
                   tipoMaterial={tipoMaterial}

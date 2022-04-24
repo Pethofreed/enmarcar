@@ -1,4 +1,3 @@
-import './styles.css';
 import Box from '@mui/material/Box';
 import Radio from '@mui/material/Radio';
 import Select from '@mui/material/Select';
@@ -8,46 +7,24 @@ import MenuItem from '@mui/material/MenuItem';
 import RadioGroup from '@mui/material/RadioGroup';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { useDispatch, useSelector } from 'react-redux';
 import { materialMadera, materialPlastico } from '../Helpers';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { CHANGE_DATA } from '../../Store/PreciosReducer';
 
-const Material = ({
-  nombreMarco,
-  numeroMarco,
+const MaterialPaspartout = ({
+  material,
+  setMaterial,
+  tipoMaterial,
+  setTipoMaterial,
+  materialValue,
+  setMaterialValue,
+  caracteristicas,
+  setCaracteristicas,
 }) => {
-
-  const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
-    ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
-  }))
-
-  const dispatch = useDispatch();
-  const [material, setMaterial] = useState('');
-  const [caracteristicas, setCaracteristicas] = useState('');
-  const [tipoMaterial, setTipoMaterial] = useState('plastico');
-  const [materialValue, setMaterialValue] = useState('estandar');
-
-
-  const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
 
   useEffect(() => {
     setMaterial('Elegir...')
   }, [tipoMaterial])
-
-  useEffect(() => {
-    if (materialValue === 'estandar') setCaracteristicas('');
-    const newData = {
-      ...data,
-      materiales: {
-        tipo: tipoMaterial,
-        material,
-        modificado: materialValue,
-        caracteristicas,
-      }
-    }
-    dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData } })
-  }, [tipoMaterial, material, materialValue, caracteristicas])
 
   const Madera = () => {
     return(
@@ -154,4 +131,4 @@ const Material = ({
   );
 };
 
-export default Material;
+export default MaterialPaspartout;

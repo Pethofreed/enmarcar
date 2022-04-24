@@ -1,95 +1,59 @@
 import './styles.css';
+import { useEffect, useState } from 'react';
 import Material from '../Material';
 import Paspartout from '../Paspartout';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import GeneralComponent from '../GeneralComponent';
-import { GUARDAR_PRECIO, CALCULAR_TOTAL } from '../../Store/PreciosReducer';
-import { calcularLongitud, materialMadera, materialPlastico } from '../Helpers';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { CHANGE_DATA } from '../../Store/PreciosReducer';
 
 const Enmarcación = ({
-  otroMarco, setOtroMarco, ultimo, precio, allPrecios, setAllPrecios, marco, ComponenteMedidas
+  otroMarco, setOtroMarco, ultimo, nombreMarco, numeroMarco
 }) => {
 
+  const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
+    ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
+  }))
+
+  const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
+
   const dispatch = useDispatch();
-  const [alto, setAlto] = useState(0);
-  const [ancho, setAncho] = useState(0);
   const [notas, setNotas] = useState('');
-  const [material, setMaterial] = useState('');
   const [vidrio, setVidrio] = useState('anti_reflejo');
-  const [altoPaspartout, setAltoPaspartout] = useState(0);
-  const [anchoPaspartout, setAnchoPaspartout] = useState(0);
-  const [caracteristicas, setCaracteristicas] = useState('');
-  const [tipoMaterial, setTipoMaterial] = useState('plastico');
-  const [materialValue, setMaterialValue] = useState('estandar');
-
-  const longitud = (alto && ancho) && calcularLongitud(alto, ancho);
-
-  let precioTotalPorLongitud;
-  let dataMaterial;
-  if (longitud) {
-    if (tipoMaterial === 'plastico' && material)
-    dataMaterial = materialPlastico.find(({ nombre }) => nombre === material)
-    else if (tipoMaterial === 'madera')
-    dataMaterial = materialMadera.find(({ nombre }) => nombre === material)
-
-    precioTotalPorLongitud = longitud * dataMaterial?.precio;
-  }
 
   useEffect(() => {
-    setMaterial('Elegir...')
-    setAllPrecios(allPrecios, allPrecios[precio] = 0)
-    dispatch({ type: GUARDAR_PRECIO, payload: allPrecios })
-    dispatch({ type: CALCULAR_TOTAL, payload: '' })
-  }, [tipoMaterial])
+    const newData = { ...data, vidrio}
+    dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
+  }, [vidrio])
 
   useEffect(() => {
-    if (precioTotalPorLongitud)
-    setAllPrecios(allPrecios, allPrecios[precio] = precioTotalPorLongitud)
-    dispatch({ type: GUARDAR_PRECIO, payload: allPrecios })
-    dispatch({ type: CALCULAR_TOTAL, payload: '' })
-  }, [precioTotalPorLongitud, allPrecios, precio, setAllPrecios])
-
-  useEffect(() => {
-    if (materialValue === 'estandar') setCaracteristicas('')
-  }, [materialValue])
+    const newData = { ...data, notas}
+    dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
+  }, [notas])
 
   return (
     <div className="enmarcacion-container">
-      {marco && (
-        <h2>Marco N° {marco}</h2>
+      {nombreMarco !== 'Primer marco' && (
+        <h2>{nombreMarco}</h2>
       )}
 
-      {ComponenteMedidas && (
-          <GeneralComponent
-          alto={alto}
-          setAlto={setAlto}
-          ancho={ancho}
-          setAncho={setAncho}
-        />
-      )}
+      <GeneralComponent
+        nombreMarco={nombreMarco}
+        numeroMarco={numeroMarco}
+      />
 
       <Material
-        material={material}
-        setMaterial={setMaterial}
-        tipoMaterial={tipoMaterial}
-        setTipoMaterial={setTipoMaterial}
-        materialValue={materialValue}
-        setMaterialValue={setMaterialValue}
-        caracteristicas={caracteristicas}
-        setCaracteristicas={setCaracteristicas}
+        nombreMarco={nombreMarco}
+        numeroMarco={numeroMarco}
       />
 
       <Divider />
 
       <Paspartout
-        altoPaspartout={altoPaspartout}
-        setAltoPaspartout={setAltoPaspartout}
-        anchoPaspartout={anchoPaspartout}
-        setAnchoPaspartout={setAnchoPaspartout}
+        nombreMarco={nombreMarco}
+        numeroMarco={numeroMarco}
       />
 
       <div className="mb-20">
