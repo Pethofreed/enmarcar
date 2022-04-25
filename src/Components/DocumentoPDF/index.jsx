@@ -32,6 +32,21 @@ export const Archivo  = (props) => {
         }}>
           Orden de trabajo
         </h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* PRIMER MARCO  */}
         <div style={{
           width: "80%",
           height: "100%",
@@ -42,12 +57,12 @@ export const Archivo  = (props) => {
           boxSizing: "border-box",
         }}>
           <div>
-            <h4 style={{
+            <h2 style={{
               marginBottom: "10px",
               textDecoration: "underline",
             }}>
               Primer marco
-            </h4>
+            </h2>
             <div style={{
               display: "flex",
               marginBottom: "-5px",
@@ -84,45 +99,60 @@ export const Archivo  = (props) => {
                 }}>
                   Ancho: {marcoUno?.medidas?.ancho}
                 </span>
-
-                <span style={{
-                  textTransform: "capitalize",
-                  margin: "0 5px",
-                  fontWeight: "400",
-                }}>
-                  Total: {marcoUno?.medidas?.longitud}
-                </span>
               )</p>
             </div>
 
             <p style={{
               margin: "5px 0",
               fontWeight: "bold",
-            }}>Materiales: (
+            }}>
               <span style={{
                 textTransform: "capitalize",
-                margin: "0 5px",
+                margin: "0 5px 5px 0",
+                fontWeight: "bold",
+              }}>
+                Material:
+              </span>
+
+              <span style={{
+                textTransform: "capitalize",
+                margin: "0 30px 0 0",
                 fontWeight: "400",
               }}>
-                Tipo: {marcoUno?.materiales?.tipo}
+                {marcoUno?.materiales?.tipo}
               </span>
 
               <span style={{
                 textTransform: "capitalize",
                 margin: "0 5px",
+                fontWeight: "bold",
+              }}>
+                Referencia:
+              </span>
+
+              <span style={{
+                margin: "0 30px 0 0",
+                textTransform: "capitalize",
                 fontWeight: "400",
               }}>
-                Codigo Material: {marcoUno?.materiales?.material}
+                {marcoUno?.materiales?.material}
               </span>
 
               <span style={{
                 textTransform: "capitalize",
                 margin: "0 5px",
+                fontWeight: "bold",
+              }}>
+                Marco:
+              </span>
+
+              <span style={{
+                textTransform: "capitalize",
                 fontWeight: "400",
               }}>
-                Marco: {marcoUno?.materiales?.modificado}
+                {marcoUno?.materiales?.modificado}
               </span>
-            )</p>
+            </p>
 
             {marcoUno?.materiales?.modificado !== "estandar" && (
               <p style={{
@@ -334,25 +364,27 @@ export const Archivo  = (props) => {
 
 
             {/* ------------------------ APUNTES GENERALES -------------- */}
-            <p style={{
-              margin: "5px 0",
-              fontWeight: "bold",
-            }}>
-              <span style={{
-                margin: "0 5px 5px 0",
+            {marcoUno?.anotaciones && (
+              <p style={{
+                margin: "5px 0",
                 fontWeight: "bold",
               }}>
-                Notas:
-              </span>
+                <span style={{
+                  margin: "0 5px 5px 0",
+                  fontWeight: "bold",
+                }}>
+                  Notas:
+                </span>
 
-              <span style={{
-                textTransform: "capitalize",
-                margin: "0 30px 0 0",
-                fontWeight: "400",
-              }}>
-                {marcoUno?.anotaciones || 'Ninguna...'}
-              </span>
-            </p>
+                <span style={{
+                  textTransform: "capitalize",
+                  margin: "0 30px 0 0",
+                  fontWeight: "400",
+                }}>
+                  {marcoUno?.anotaciones}
+                </span>
+              </p>
+            )}
 
 
           </div>

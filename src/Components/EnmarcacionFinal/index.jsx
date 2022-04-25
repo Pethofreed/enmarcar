@@ -77,7 +77,7 @@ const EnmarcacionFinal = () => {
         <h1>Total: {total ? formatter.format(total) : 0} Pesos</h1>
       </div>
 
-      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)}>
+      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)} disabled={!total}>
         Generar PDF
       </Button>
 
