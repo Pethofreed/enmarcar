@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Button, Divider } from "@mui/material";
 import Enmarcación from "../Enmarcacion";
 import { useSelector } from "react-redux";
+import { Archivo } from "../DocumentoPDF";
 
 const EnmarcacionFinal = () => {
 
@@ -17,6 +19,7 @@ const EnmarcacionFinal = () => {
   const total = Object.values(ordenDeTrabajo)?.map(( { precioMaterial }) => precioMaterial)
   .reduce((a,b) => a + b, 0);
 
+  const [generarPdf, setGenerarPdf] = useState(false);
   const [nuevoMarco1, setNuevoMarco1] = useState(false);
   const [nuevoMarco2, setNuevoMarco2] = useState(false);
   const [nuevoMarco3, setNuevoMarco3] = useState(false);
@@ -73,6 +76,19 @@ const EnmarcacionFinal = () => {
       <div>
         <h1>Total: {total ? formatter.format(total) : 0} Pesos</h1>
       </div>
+
+      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)}>
+        Generar PDF
+      </Button>
+
+      {generarPdf && (
+        <>
+          <div className="mt-20">
+            <Divider />
+          </div>
+          <Archivo ordenDeTrabajo={ordenDeTrabajo} />
+        </>
+      )}
 
     </>
   )

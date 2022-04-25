@@ -29,7 +29,7 @@ const Enmarcación = ({
   }, [vidrio])
 
   useEffect(() => {
-    const newData = { ...data, notas}
+    const newData = { ...data, anotaciones: notas}
     dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
   }, [notas])
 

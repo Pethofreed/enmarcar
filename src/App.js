@@ -7,6 +7,7 @@ import { Router,
 import Login from './Components/Login';
 import { history } from './Utils/history';
 import Dashboard from './Components/Dashboard';
+import { Archivo } from './Components/DocumentoPDF';
 
 function PrivateRoute({children, ...rest}) {
   const token = localStorage.getItem('token')
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route exact path="/pdf">
+          <Archivo />
         </Route>
       </Switch>
     </Router>

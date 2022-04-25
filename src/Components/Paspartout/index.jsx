@@ -30,7 +30,7 @@ const Paspartout = ({
   const [anchoPaspartout, setAnchoPaspartout] = useState(0);
 
   const [color, setColor] = useState('');
-  const [marco, setMarco] = useState('false');
+  const [marco, setMarco] = useState('sin_marco');
   const [type, setType] = useState('tradicional');
   const [paspartout, setPaspartout] = useState(false);
 
@@ -50,7 +50,7 @@ const Paspartout = ({
       setAnchoPaspartout(0)
       setColor('')
       setType('tradicional')
-      setMarco(false)
+      setMarco('sin_marco')
       setTipoMaterial('plastico')
       setMaterial('Elegir...')
       setCaracteristicas('')
@@ -214,6 +214,8 @@ const Paspartout = ({
                   setMaterialValue={setMaterialValue}
                   caracteristicas={caracteristicas}
                   setCaracteristicas={setCaracteristicas}
+                  nombreMarco={nombreMarco}
+                  numeroMarco={numeroMarco}
                 />
               )}
             </div>
