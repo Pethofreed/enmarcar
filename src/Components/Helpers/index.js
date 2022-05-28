@@ -1,13 +1,22 @@
 export const calcularLongitud = (alto, ancho) => {
   const longitud = (alto * 2) + (ancho * 2);
   return longitud / 100;
-}
+};
 
 export const formatter = new Intl.NumberFormat('es-CO', {
   style: 'currency',
   currency: 'COP',
   minimumFractionDigits: 0
-})
+});
+
+export const glassesPrice = {
+  ninguno: 0,
+  anti_reflejo: 75000,
+  claro4mm: 90000,
+  espejo3mm: 70000,
+  espejo4mm: 100000,
+  vinilo: 20000,
+};
 
 export const materialPlastico = [
   { nombre: 'Elegir...', precio: 0 },

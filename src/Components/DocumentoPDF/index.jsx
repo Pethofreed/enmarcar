@@ -197,23 +197,15 @@ export const Archivo  = (props) => {
                   <p style={{
                     margin: "20px 0 5px 0",
                     fontWeight: "bold",
-                  }}>Medidas: (
+                  }}>Medida:
                     <span style={{
                       textTransform: "capitalize",
                       margin: "0 5px",
                       fontWeight: "400",
                     }}>
-                      Alto: {marcoUno?.paspartoutDetails?.paspartoutAlto}
+                      {marcoUno?.paspartoutDetails?.paspartoutMedida}
                     </span>
-
-                    <span style={{
-                      textTransform: "capitalize",
-                      margin: "0 5px",
-                      fontWeight: "400",
-                    }}>
-                      Ancho: {marcoUno?.paspartoutDetails?.paspartoutAncho}
-                    </span>
-                  )</p>
+                  </p>
                 </div>
 
                 <p style={{

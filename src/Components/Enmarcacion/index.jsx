@@ -5,19 +5,10 @@ import Paspartout from '../Paspartout';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import GeneralComponent from '../GeneralComponent';
+import { formatter, glassesPrice } from '../Helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_DATA } from '../../Store/PreciosReducer';
 import { Box, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography } from '@mui/material';
-import { formatter } from '../Helpers';
-
-const precioVidrios = {
-  ninguno: 0,
-  anti_reflejo: 75000,
-  claro4mm: 90000,
-  espejo3mm: 70000,
-  espejo4mm: 100000,
-  vinilo: 20000,
-}
 
 const roundSizes = (n) => Math.ceil(n/10)*10;
 
@@ -29,40 +20,40 @@ const Enmarcación = ({
     ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
   }));
 
-  const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
-  const { total, paspartout, paspartoutDetails: { tipoPaspartout } } = data;
-  const cobroPaspartout = paspartout ? (tipoPaspartout === "tradicional" ? 0.10 : tipoPaspartout === "externo" ? 0.30 : 0 ) : 0
-  const totalSinPaspartout = data?.precioMaterial + data?.precioVidrio;
-  const totalMarco = totalSinPaspartout + ( totalSinPaspartout * cobroPaspartout);
+  const dataFrame = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
+  const { total, paspartout, paspartoutDetails: { tipoPaspartout } } = dataFrame;
+  const percentagePaspartout = paspartout ? (tipoPaspartout === "tradicional" ? 0.10 : tipoPaspartout === "externo" ? 0.30 : 0 ) : 0
+  const priceWithoutPaspartout = dataFrame?.precioMaterial + dataFrame?.precioVidrio;
+  const totalPrice = priceWithoutPaspartout + ( priceWithoutPaspartout * percentagePaspartout);
 
   useEffect(() => {
     const newData = {
-      ...data,
-      total: totalMarco
+      ...dataFrame,
+      total: totalPrice
     }
     dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
-  }, [totalMarco])
+  }, [totalPrice])
 
   const dispatch = useDispatch();
-  const [notas, setNotas] = useState('');
-  const [vidrio, setVidrio] = useState('ninguno');
+  const [notes, setNotes] = useState('');
+  const [glass, setGlass] = useState('ninguno');
 
   useEffect(() => {
-    const medidas = roundSizes(data?.medidas?.alto)/100 * roundSizes(data?.medidas?.ancho)/100;
-    const precioVidrioActual = precioVidrios[vidrio];
-    const precio = medidas * precioVidrioActual;
+    const sizes = roundSizes(dataFrame?.medidas?.alto)/100 * roundSizes(dataFrame?.medidas?.ancho)/100;
+    const priceCurrentGlass = glassesPrice[glass];
+    const price = sizes * priceCurrentGlass;
     const newData = {
-      ...data,
-      vidrio,
-      precioVidrio: precio,
+      ...dataFrame,
+      vidrio: glass,
+      precioVidrio: price,
     }
     dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
-  }, [vidrio])
+  }, [glass])
 
   useEffect(() => {
-    const newData = { ...data, anotaciones: notas}
+    const newData = { ...dataFrame, anotaciones: notes}
     dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
-  }, [notas])
+  }, [notes])
 
   return (
     <div className="enmarcacion-container">
@@ -98,10 +89,10 @@ const Enmarcación = ({
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label='Material'
-            value={vidrio}
+            value={glass}
             size="small"
-            onChange={(e) => setVidrio(e.target.value)}
-            disabled={!data?.medidas?.longitud}
+            onChange={(e) => setGlass(e.target.value)}
+            disabled={!dataFrame?.medidas?.longitud}
           >
             <MenuItem value="ninguno">Elegir...</MenuItem>
             <MenuItem value="anti_reflejo">Anti reflejo</MenuItem>
@@ -118,8 +109,8 @@ const Enmarcación = ({
         label="Notas"
         placeholder="Apuntes generales..."
         multiline
-        value={notas}
-        onChange={(e) => setNotas(e.target.value)}
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
       />
 
       <div className='mt-20'>
