@@ -16,8 +16,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',
@@ -49,8 +48,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',
@@ -81,8 +79,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',
@@ -113,8 +110,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',
@@ -145,8 +141,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',
@@ -177,8 +172,7 @@ const initialState = {
       },
       paspartout: false,
       paspartoutDetails: {
-        paspartoutAncho: 0,
-        paspartoutAlto: 0,
+        paspartoutMedida: 0,
         paspartoutColor: '',
         tipoPaspartout: 'tradicional',
         marco: 'sin_marco',

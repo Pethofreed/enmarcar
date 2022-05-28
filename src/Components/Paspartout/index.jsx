@@ -26,8 +26,7 @@ const Paspartout = ({
   const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
 
   const dispath = useDispatch();
-  const [altoPaspartout, setAltoPaspartout] = useState(0);
-  const [anchoPaspartout, setAnchoPaspartout] = useState(0);
+  const [medidaPaspartout, setMedidaPaspartout] = useState(0);
 
   const [color, setColor] = useState('');
   const [marco, setMarco] = useState('sin_marco');
@@ -40,14 +39,13 @@ const Paspartout = ({
   const [materialValue, setMaterialValue] = useState('estandar');
 
   const calcularPaspartout = () => {
-    const sum = (altoPaspartout * 2) + (anchoPaspartout * 2);
+    const sum = medidaPaspartout * 4;
     return sum / 100;
   }
 
   useEffect(() => {
     if (!paspartout) {
-      setAltoPaspartout(0)
-      setAnchoPaspartout(0)
+      setMedidaPaspartout(0)
       setColor('')
       setType('tradicional')
       setMarco('sin_marco')
@@ -59,8 +57,7 @@ const Paspartout = ({
         ...data,
         paspartout: false,
         paspartoutDetails: {
-          paspartoutAncho: 0,
-          paspartoutAlto: 0,
+          paspartoutMedida: 0,
           paspartoutColor: '',
           tipoPaspartout: 'tradicional',
           marco: 'sin_marco',
@@ -78,8 +75,7 @@ const Paspartout = ({
         ...data,
         paspartout: true,
         paspartoutDetails: {
-          paspartoutAncho: anchoPaspartout,
-          paspartoutAlto: altoPaspartout,
+          paspartoutMedida: medidaPaspartout,
           paspartoutColor: color,
           tipoPaspartout: type,
           marco: marco,
@@ -96,7 +92,7 @@ const Paspartout = ({
 
     if (materialValue === 'estandar')
       setCaracteristicas('')
-  }, [paspartout, anchoPaspartout, altoPaspartout, color, marco, type, material, caracteristicas, tipoMaterial ,materialValue])
+  }, [paspartout, medidaPaspartout, color, marco, type, material, caracteristicas, tipoMaterial ,materialValue])
 
   return(
     <>
@@ -116,13 +112,13 @@ const Paspartout = ({
             <div className="enmarcacion-ancho-alto-inputs mt-10">
               <TextField
                 id="outlined-number"
-                label="Ancho"
+                label="Medida"
                 type="number"
                 size="small"
-                className='ancho'
+                className='Medida'
                 rows={1}
-                value={anchoPaspartout}
-                onChange={(e) => setAnchoPaspartout(e.target.value)}
+                value={medidaPaspartout}
+                onChange={(e) => setMedidaPaspartout(e.target.value)}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -132,24 +128,7 @@ const Paspartout = ({
                   width: 150
                 }}
               />
-              <TextField
-                id="outlined-number"
-                label="Alto"
-                type="number"
-                size="small"
-                maxRows='3'
-                value={altoPaspartout}
-                onChange={(e) => setAltoPaspartout(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                sx={{
-                  marginRight: '10px',
-                  marginBottom: '15px',
-                  width: 150
-                }}
-              />
-              {(!!anchoPaspartout && !!altoPaspartout) && (
+              {!!medidaPaspartout && (
                 <Typography>
                   Total: {calcularPaspartout()}
                 </Typography>
