@@ -30,7 +30,18 @@ const Enmarcación = ({
   }));
 
   const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
-  const total = data?.precioMaterial + data?.precioVidrio;
+  const { total, paspartout, paspartoutDetails: { tipoPaspartout } } = data;
+  const cobroPaspartout = paspartout ? (tipoPaspartout === "tradicional" ? 0.10 : tipoPaspartout === "externo" ? 0.30 : 0 ) : 0
+  const totalSinPaspartout = data?.precioMaterial + data?.precioVidrio;
+  const totalMarco = totalSinPaspartout + ( totalSinPaspartout * cobroPaspartout);
+
+  useEffect(() => {
+    const newData = {
+      ...data,
+      total: totalMarco
+    }
+    dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData} })
+  }, [totalMarco])
 
   const dispatch = useDispatch();
   const [notas, setNotas] = useState('');

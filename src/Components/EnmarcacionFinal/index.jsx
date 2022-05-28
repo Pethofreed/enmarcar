@@ -12,12 +12,8 @@ const EnmarcacionFinal = () => {
     ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
   }))
 
-  const preciosMaterial = Object.values(ordenDeTrabajo)?.map(( { precioMaterial }) => precioMaterial)
+  const total = Object.values(ordenDeTrabajo)?.map(( { total }) => total)
   .reduce((a,b) => a + b, 0);
-  const preciosVidrios = Object.values(ordenDeTrabajo)?.map(( { precioVidrio }) => precioVidrio)
-  .reduce((a,b) => a + b, 0);
-
-  const total = preciosMaterial + preciosVidrios;
 
   const [generarPdf, setGenerarPdf] = useState(false);
   const [nuevoMarco1, setNuevoMarco1] = useState(false);
@@ -79,7 +75,7 @@ const EnmarcacionFinal = () => {
         </h1>
       </div>
 
-      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)} disabled={!preciosMaterial}>
+      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)} disabled={!total}>
         Generar PDF
       </Button>
 

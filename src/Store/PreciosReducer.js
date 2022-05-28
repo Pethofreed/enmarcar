@@ -33,6 +33,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
     segundo: {
       nombre: 'Segundo marco',
@@ -65,6 +66,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
     tercero: {
       nombre: 'Tercer marco',
@@ -96,6 +98,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
     cuarto: {
       nombre: 'Cuarto marco',
@@ -127,6 +130,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
     quinto: {
       nombre: 'Quinto marco',
@@ -158,6 +162,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
     sexto: {
       nombre: 'Sexto marco',
@@ -189,6 +194,7 @@ const initialState = {
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
+      total : 0,
     },
   }
 }

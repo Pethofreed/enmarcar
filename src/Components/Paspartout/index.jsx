@@ -104,6 +104,7 @@ const Paspartout = ({
         <FormControlLabel
           control={
             <Checkbox
+              disabled={!data?.medidas?.longitud}
               checked={paspartout}
               onChange={() => setPaspartout(!paspartout)}
             />
