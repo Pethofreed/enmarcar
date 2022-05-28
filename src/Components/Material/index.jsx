@@ -30,9 +30,8 @@ const Material = ({
 
 
   const data = Object.values(ordenDeTrabajo)?.find(( { nombre }) => nombre === nombreMarco);
-  const { alto, ancho } = data?.medidas || {};
+  const { alto, ancho, longitud } = data?.medidas || {};
   const noValido = !(alto > 0 && ancho > 0 );
-
   useEffect(() => {
     setMaterial('Elegir...')
   }, [tipoMaterial])
@@ -42,7 +41,7 @@ const Material = ({
     const materialActual = tipoMaterial === 'plastico'
       ? materialPlastico?.find(({ nombre }) => nombre === material)
       : materialMadera?.find(({ nombre }) => nombre === material);
-    const precioMaterial =  data?.medidas?.longitud * materialActual?.precio;
+    const precioMaterial =  longitud * materialActual?.precio;
     const newData = {
       ...data,
       precioMaterial,
@@ -54,7 +53,7 @@ const Material = ({
       }
     }
     dispatch({ type: CHANGE_DATA, payload: { marco: numeroMarco, data: newData } })
-  }, [tipoMaterial, material, materialValue, caracteristicas])
+  }, [tipoMaterial, material, materialValue, caracteristicas, longitud, dispatch ])
 
   const Madera = () => {
     return(

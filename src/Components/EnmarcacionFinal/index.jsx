@@ -1,23 +1,23 @@
+import './styles.css';
 import { useState } from "react";
-import { Button, Divider } from "@mui/material";
+import { formatter } from "../Helpers";
 import Enmarcación from "../Enmarcacion";
 import { useSelector } from "react-redux";
 import { Archivo } from "../DocumentoPDF";
+import { Button, Divider } from "@mui/material";
 
 const EnmarcacionFinal = () => {
-
-  const formatter = new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 0
-  })
 
   const { ordenDeTrabajo } = useSelector(({PreciosReducer}) => ({
     ordenDeTrabajo: PreciosReducer.ordenDeTrabajo,
   }))
 
-  const total = Object.values(ordenDeTrabajo)?.map(( { precioMaterial }) => precioMaterial)
+  const preciosMaterial = Object.values(ordenDeTrabajo)?.map(( { precioMaterial }) => precioMaterial)
   .reduce((a,b) => a + b, 0);
+  const preciosVidrios = Object.values(ordenDeTrabajo)?.map(( { precioVidrio }) => precioVidrio)
+  .reduce((a,b) => a + b, 0);
+
+  const total = preciosMaterial + preciosVidrios;
 
   const [generarPdf, setGenerarPdf] = useState(false);
   const [nuevoMarco1, setNuevoMarco1] = useState(false);
@@ -74,10 +74,12 @@ const EnmarcacionFinal = () => {
         />
       )}
       <div>
-        <h1>Total: {total ? formatter.format(total) : 0} Pesos</h1>
+        <h1 className="total">
+          Total: {total ? formatter.format(total) : 0} Pesos
+        </h1>
       </div>
 
-      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)} disabled={!total}>
+      <Button variant="contained" onClick={() => setGenerarPdf(!generarPdf)} disabled={!preciosMaterial}>
         Generar PDF
       </Button>
 

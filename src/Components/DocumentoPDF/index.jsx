@@ -355,7 +355,11 @@ export const Archivo  = (props) => {
                 margin: "0 30px 0 0",
                 fontWeight: "400",
               }}>
-                {marcoUno?.vidrio === 'anti_reflejo' ? 'Anti reflejo' : marcoUno?.vidrio}
+                {marcoUno?.vidrio === 'anti_reflejo' && 'Anti reflejo'}
+                {marcoUno?.vidrio === 'claro4mm' && 'Claro 4mm'}
+                {marcoUno?.vidrio === 'vinilo' && 'Vinilo'}
+                {marcoUno?.vidrio === 'espejo3mm' && 'Espejo 3mm'}
+                {marcoUno?.vidrio === 'espejo4mm' && 'Espejo 4mm'}
               </span>
             </p>
 

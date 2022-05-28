@@ -1,6 +1,4 @@
 export const CHANGE_DATA = 'CHANGE_DATA';
-export const CHANGE_MATERIAL = 'CHANGE_MATERIAL';
-
 
 const initialState = {
   ordenDeTrabajo: {
@@ -30,7 +28,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -61,7 +60,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -91,7 +91,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -121,7 +122,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -151,7 +153,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -181,7 +184,8 @@ const initialState = {
           caracteristicas: '',
         },
       },
-      vidrio: 'anti_reflejo',
+      vidrio: 'ninguno',
+      precioVidrio: 0,
       anotaciones: '',
       precioMaterial: 0,
       precioPaspartout: 0,
@@ -198,11 +202,6 @@ export function PreciosReducer(state = initialState, action){
           ...state.ordenDeTrabajo,
           [action.payload.marco]: action.payload.data
         }
-      }
-    case CHANGE_MATERIAL:
-      return {
-        ...state,
-        precios: action.payload
       }
     default:
       return state

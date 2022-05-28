@@ -3,6 +3,12 @@ export const calcularLongitud = (alto, ancho) => {
   return longitud / 100;
 }
 
+export const formatter = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  minimumFractionDigits: 0
+})
+
 export const materialPlastico = [
   { nombre: 'Elegir...', precio: 0 },
   { nombre: '1001 05', precio: 140360 },
