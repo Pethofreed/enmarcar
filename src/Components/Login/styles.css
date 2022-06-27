@@ -8,12 +8,39 @@
   background-color: #2d2a32;
 }
 
+.container-card{
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.container-data-card {
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
 .form-inputs {
   display: flex;
   flex-direction: column;
 }
 
+.container-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo-enmarcar {
   width: 300px;
-  margin-bottom: 20px;
+  margin: 0px 0px 20px 0px;
+}
+
+.error-login {
+  color: #2d2a32;
+  font-size: 14px;
+  text-align: center;
 }
