@@ -17,4 +17,11 @@
   border-radius: 5px;
   font-size: 18px;
   font-weight: bold;
+  transition: 0.5s;
+  box-shadow: 3px 3px 5px #eab017;
+}
+
+.component-button:hover {
+  cursor: pointer;
+  box-shadow: none;
 }

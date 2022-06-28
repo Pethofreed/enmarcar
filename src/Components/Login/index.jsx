@@ -1,9 +1,10 @@
 import './styles.css';
-import { useState } from 'react';
-import { history } from '../../Utils/history';
 import Logo from './logo_enmarcar.png';
+import { useState } from 'react';
+import Loader from '../Loader';
 import Button from '../Button';
 import Input from '../Input';
+import axios from 'axios';
 
 const users = [
   { username: 'admin', pass: 'root' },
@@ -11,20 +12,32 @@ const users = [
 ]
 
 const Login = () => {
+  const [loading, setLoading] = useState(false)
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+  const [user, setUser] = useState('')
 
-  const [user, setUser] = useState('');
-  const [error, setError] = useState(false);
-  const [password, setPassword] = useState('');
-
-  const handleSession = () => {
-    users.forEach(({username , pass}) => {
-      if (user === username && password === pass) {
-        setError(false);
-        setPassword('');
-        setUser('');
-        history.push('/dashboard')
-      } else setError(true);
-    })
+  const handleSession = async () => {
+    //setLoading(true)
+    // if (!user || !password) {
+    //   setError(true)
+    //   return
+    // }
+    // setError(false)
+    // try {
+    //   const {data} = await axios({
+    //     method: POST,
+    //     baseURL: process.env.REACT_APP_SERVER,
+    //     url: '',
+    //     data: { user, password }
+    //   })
+    //   setLoading(false)
+    //   localStorage.setItem("token", data)
+    //   push.navigate('/dashboard')
+    // } catch(error) {
+    //   setError(true)
+    //  setLoading(false)
+    // }
   }
 
   return(
@@ -63,10 +76,12 @@ const Login = () => {
               }}
               value={password}
             />
-            <Button
-              onClick={() => handleSession()}
-              children={"Ingresar"}
-            />
+            {!loading ?
+              <Button
+                onClick={() => handleSession()}
+                children={"Ingresar"}
+              /> : <Loader />
+            }
           </div>
           {error && (
             <p className="error-login">
