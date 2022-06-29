@@ -1,43 +1,21 @@
-import './styles.css';
+import { history } from '../../Utils/history';
 import Logo from './logo_enmarcar.png';
 import { useState } from 'react';
-import Loader from '../Loader';
 import Button from '../Button';
 import Input from '../Input';
-import axios from 'axios';
-
-const users = [
-  { username: 'admin', pass: 'root' },
-  { username: 'Usuario_uno', pass: 'root' },
-]
+import './styles.css';
 
 const Login = () => {
-  const [loading, setLoading] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
   const [user, setUser] = useState('')
 
-  const handleSession = async () => {
-    //setLoading(true)
-    // if (!user || !password) {
-    //   setError(true)
-    //   return
-    // }
-    // setError(false)
-    // try {
-    //   const {data} = await axios({
-    //     method: POST,
-    //     baseURL: process.env.REACT_APP_SERVER,
-    //     url: '',
-    //     data: { user, password }
-    //   })
-    //   setLoading(false)
-    //   localStorage.setItem("token", data)
-    //   push.navigate('/dashboard')
-    // } catch(error) {
-    //   setError(true)
-    //  setLoading(false)
-    // }
+  const handleSession = () => {
+    console.log("hola");
+    if(user === process.env.REACT_APP_USER &&
+      password === process.env.REACT_APP_PASS) {
+        history.push('/dashboard')
+      }
   }
 
   return(
@@ -76,12 +54,10 @@ const Login = () => {
               }}
               value={password}
             />
-            {!loading ?
-              <Button
-                onClick={() => handleSession()}
-                children={"Ingresar"}
-              /> : <Loader />
-            }
+            <Button
+              onClick={() => handleSession()}
+              children={"Ingresar"}
+            />
           </div>
           {error && (
             <p className="error-login">
