@@ -11,11 +11,10 @@ const Login = () => {
   const [user, setUser] = useState('')
 
   const handleSession = () => {
-    console.log("hola");
     if(user === process.env.REACT_APP_USER &&
       password === process.env.REACT_APP_PASS) {
         history.push('/dashboard')
-      }
+      } else setError(true)
   }
 
   return(
