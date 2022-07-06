@@ -1,11 +1,13 @@
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import { TabsReducer } from './TabsReducer'
 import { PreciosReducer } from './PreciosReducer'
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 const appReducers = combineReducers({
-  PreciosReducer
+  PreciosReducer,
+  TabsReducer,
 })
 
 const rootReducer = (state, action) => {
