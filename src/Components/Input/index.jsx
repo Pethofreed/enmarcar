@@ -8,10 +8,11 @@ const Input = ({ id, label, onChange, placeholder, children, type, value }) => {
           className="label-component"
           htmlFor={id}
         >
-          {children}
+          {label}
         </label>
       }
       <input
+        children={children}
         className="input-component"
         type={type}
         id={id}

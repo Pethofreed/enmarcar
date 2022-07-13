@@ -26,13 +26,10 @@ const Login = () => {
           </div>
           <div className="form-inputs">
             <Input
-              label
-              children={"Usuario:"}
-              htmlFor={"usuario"}
-              Input
-              type={"text"}
-              id={"usuario"}
-              placeholder={"Nombre de usuario"}
+              label="Usuario:"
+              type="text"
+              id="usuario"
+              placeholder="Nombre de usuario"
               onChange={(e) => {
                 setUser(e.target.value)
                 setError(false)
@@ -40,23 +37,22 @@ const Login = () => {
               value={user}
             />
             <Input
-              label
-              children={"Contraseña:"}
-              htmlFor={"contrasena"}
-              Input
-              type={"password"}
-              id={"contrasena"}
-              placeholder={"Ingresa aqui la contraseña"}
+              label="Constraseña"
+              type="password"
+              id="contrasena"
+              placeholder="Ingresa aqui la contraseña"
               onChange={(e) => {
                 setPassword(e.target.value)
                 setError(false)
               }}
               value={password}
             />
-            <Button
-              onClick={() => handleSession()}
-              children={"Ingresar"}
-            />
+            <div className="container-button">
+              <Button
+                onClick={() => handleSession()}
+                children={"Ingresar"}
+              />
+            </div>
           </div>
           {error && (
             <p className="error-login">
