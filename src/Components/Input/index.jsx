@@ -1,6 +1,6 @@
 import "./styles.css"
 
-const Input = ({ id, label, onChange, placeholder, children, type, value }) => {
+const Input = ({ id, label, onChange, placeholder, type, value }) => {
   return(
     <div className="container-label-input">
       {label &&
@@ -12,7 +12,6 @@ const Input = ({ id, label, onChange, placeholder, children, type, value }) => {
         </label>
       }
       <input
-        children={children}
         className="input-component"
         type={type}
         id={id}
