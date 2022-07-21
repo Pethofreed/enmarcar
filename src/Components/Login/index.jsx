@@ -1,75 +1,66 @@
-import './styles.css';
-import { useState } from 'react';
 import { history } from '../../Utils/history';
-import Card from '@mui/material/Card';
 import Logo from './logo_enmarcar.png';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import { Typography } from '@mui/material';
-
-const users = [
-  { username: 'admin', pass: 'root' },
-  { username: 'Usuario_uno', pass: 'root' },
-]
+import { useState } from 'react';
+import Button from '../Button';
+import Input from '../Input';
+import './styles.css';
 
 const Login = () => {
-
-  const [user, setUser] = useState('');
-  const [error, setError] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
+  const [user, setUser] = useState('')
 
   const handleSession = () => {
-    users.forEach(({username , pass}) => {
-      if (user === username && password === pass) {
-        setError(false);
-        setPassword('');
-        setUser('');
+    if(user === process.env.REACT_APP_USER &&
+      password === process.env.REACT_APP_PASS) {
         history.push('/dashboard')
-      } else setError(true);
-    })
+      } else setError(true)
   }
 
   return(
     <div className="login-container">
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <img src={Logo} alt="Enmarcar logo" className='logo-enmarcar'/>
+      <div className="container-card">
+        <div className="container-data-card">
+          <div className="container-image">
+            <img src={Logo} className='logo-enmarcar'/>
+          </div>
           <div className="form-inputs">
-            <TextField
-              id="standard-basic"
-              label="Usuario"
-              variant="standard"
+            <Input
+              label="Usuario:"
+              type="text"
+              id="usuario"
+              placeholder="Nombre de usuario"
               onChange={(e) => {
                 setUser(e.target.value)
                 setError(false)
               }}
               value={user}
             />
-
-            <TextField
-              id="standard-basic"
-              label="Contraseña"
-              variant="standard"
+            <Input
+              label="Constraseña"
               type="password"
+              id="contrasena"
+              placeholder="Ingresa aqui la contraseña"
               onChange={(e) => {
                 setPassword(e.target.value)
                 setError(false)
               }}
               value={password}
             />
+            <div className="container-button">
+              <Button
+                onClick={() => handleSession()}
+                children={"Ingresar"}
+              />
+            </div>
           </div>
           {error && (
-            <Typography variant="caption" display="block" gutterBottom sx={{ color: 'red', fontWeight: 'bold'}}>
+            <p className="error-login">
               Usuario o contraseña incorrecto.
-            </Typography>
+            </p>
           )}
-        </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => handleSession()}>Ingresar</Button>
-        </CardActions>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

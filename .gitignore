@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 calculadora.txt
+.env
 
 # testing
 /coverage
